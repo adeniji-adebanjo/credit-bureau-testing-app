@@ -120,25 +120,26 @@ export default function ObjectivesChecklist() {
   const gatesCompletedCount = gates.filter((g) => g.completed).length;
 
   return (
-    <div className="grid gap-6 md:grid-cols-2">
+    <div className="grid gap-4 sm:gap-6 md:grid-cols-2">
       <Card>
         <CardHeader>
-          <CardTitle>
+          <CardTitle className="text-lg sm:text-2xl">
             Primary Objectives ({completedCount}/{objectives.length})
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4">
             {objectives.map((objective) => (
               <div key={objective.id} className="flex items-start space-x-3">
                 <Checkbox
                   id={objective.id}
                   checked={objective.completed}
                   onCheckedChange={() => toggleObjective(objective.id)}
+                  className="mt-1"
                 />
                 <Label
                   htmlFor={objective.id}
-                  className={`text-sm leading-relaxed ${
+                  className={`text-sm leading-relaxed cursor-pointer ${
                     objective.completed
                       ? "text-gray-500 line-through"
                       : "text-gray-900"
@@ -154,22 +155,23 @@ export default function ObjectivesChecklist() {
 
       <Card>
         <CardHeader>
-          <CardTitle>
+          <CardTitle className="text-lg sm:text-2xl">
             Quality Gates ({gatesCompletedCount}/{gates.length})
           </CardTitle>
         </CardHeader>
         <CardContent>
-          <div className="space-y-4">
+          <div className="space-y-3 sm:space-y-4">
             {gates.map((gate) => (
               <div key={gate.id} className="flex items-start space-x-3">
                 <Checkbox
                   id={gate.id}
                   checked={gate.completed}
                   onCheckedChange={() => toggleGate(gate.id)}
+                  className="mt-1"
                 />
                 <Label
                   htmlFor={gate.id}
-                  className={`text-sm leading-relaxed ${
+                  className={`text-sm leading-relaxed cursor-pointer ${
                     gate.completed
                       ? "text-gray-500 line-through"
                       : "text-gray-900"

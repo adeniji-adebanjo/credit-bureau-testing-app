@@ -10,6 +10,7 @@ import {
   Bug,
   BarChart3,
   FileText,
+  X,
 } from "lucide-react";
 
 const navigation = [
@@ -29,23 +30,36 @@ const navigation = [
   { name: "Reports & Export", href: "/reports", icon: FileText },
 ];
 
-export default function Sidebar() {
+interface SidebarProps {
+  onClose?: () => void;
+}
+
+export default function Sidebar({ onClose }: SidebarProps) {
   const pathname = usePathname();
 
   return (
     <div className="flex h-screen w-64 flex-col bg-gray-900 text-white">
-      <div className="flex h-16 items-center justify-center border-b border-gray-800">
-        <h1 className="text-xl font-bold">Testing Dashboard</h1>
+      <div className="flex h-16 items-center justify-between border-b border-gray-800 px-4">
+        <h1 className="text-lg font-bold sm:text-xl">Testing Dashboard</h1>
+        {onClose && (
+          <button
+            onClick={onClose}
+            className="rounded-md p-1 hover:bg-gray-800 lg:hidden"
+          >
+            <X className="h-5 w-5" />
+          </button>
+        )}
       </div>
-      <nav className="flex-1 space-y-1 px-2 py-4">
+      <nav className="flex-1 space-y-1 overflow-y-auto px-2 py-4">
         {navigation.map((item) => {
           const isActive = pathname === item.href;
           return (
             <Link
               key={item.name}
               href={item.href}
+              onClick={onClose}
               className={cn(
-                "group flex items-center rounded-md px-2 py-2 text-sm font-medium transition-colors",
+                "group flex items-center rounded-md px-3 py-2.5 text-sm font-medium transition-colors",
                 isActive
                   ? "bg-gray-800 text-white"
                   : "text-gray-300 hover:bg-gray-800 hover:text-white"
@@ -59,7 +73,7 @@ export default function Sidebar() {
                     : "text-gray-400 group-hover:text-white"
                 )}
               />
-              {item.name}
+              <span className="truncate">{item.name}</span>
             </Link>
           );
         })}
