@@ -96,7 +96,7 @@ src/
 │   │   └── MainLayout.tsx
 │   └── testing/
 │       ├── TestCaseTable.tsx
-│       ├── ObjectivesChecklist.tsx
+│       ├── ObjectivesCheckList.tsx
 │       ├── TestEnvironmentSetup.tsx
 │       ├── DefectTracker.tsx
 │       └── MetricsDashboard.tsx
@@ -182,7 +182,7 @@ Create these in `src/components/layout/`:
 Create these in `src/components/testing/`:
 
 1. **TestCaseTable.tsx** - Editable test case table
-2. **ObjectivesChecklist.tsx** - Objectives tracking
+2. **ObjectivesCheckList.tsx** - Objectives tracking
 3. **TestEnvironmentSetup.tsx** - Environment status
 4. **DefectTracker.tsx** - Defect management
 5. **MetricsDashboard.tsx** - Success metrics

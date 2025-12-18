@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { CheckCircle2, AlertCircle, Clock, TrendingUp } from "lucide-react";
-import ObjectivesChecklist from "@/components/testing/ObjectivesChecklist";
+import ObjectivesCheckList from "@/components/testing/ObjectivesCheckList";
 import TestEnvironmentSetup from "@/components/testing/TestEnvironmentSetup";
 
 export default function HomePage() {
@@ -122,7 +122,7 @@ export default function HomePage() {
       </Card>
 
       {/* Testing Objectives */}
-      <ObjectivesChecklist />
+      <ObjectivesCheckList />
 
       {/* Test Environment */}
       <TestEnvironmentSetup />
