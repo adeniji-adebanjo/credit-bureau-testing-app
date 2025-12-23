@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { TestEnvironment } from "@/types/test-case";
-import { saveEnvironments, loadEnvironments } from "@/lib/storage";
+import { saveEnvironments, loadEnvironments } from "@/lib/cloudStorage";
 
 const initialEnvironments: TestEnvironment[] = [
   {
@@ -29,10 +29,13 @@ export default function TestEnvironmentSetup() {
     useState<TestEnvironment[]>(initialEnvironments);
 
   useEffect(() => {
-    const loaded = loadEnvironments();
-    if (loaded.length > 0) {
-      setEnvironments(loaded);
-    }
+    const load = async () => {
+      const loaded = await loadEnvironments();
+      if (loaded.length > 0) {
+        setEnvironments(loaded);
+      }
+    };
+    load();
   }, []);
 
   useEffect(() => {

@@ -13,7 +13,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { getStatusColor } from "@/lib/utils";
-import { saveMetrics, loadMetrics } from "@/lib/storage";
+import { saveMetrics, loadMetrics } from "@/lib/cloudStorage";
 import { CheckCircle2, XCircle, Clock } from "lucide-react";
 
 const defaultMetrics: SuccessMetric[] = [
@@ -52,10 +52,13 @@ export default function MetricsDashboard() {
   const [editingId, setEditingId] = useState<string | null>(null);
 
   useEffect(() => {
-    const loaded = loadMetrics();
-    if (loaded.length > 0) {
-      setMetrics(loaded);
-    }
+    const load = async () => {
+      const loaded = await loadMetrics();
+      if (loaded.length > 0) {
+        setMetrics(loaded);
+      }
+    };
+    load();
   }, []);
 
   useEffect(() => {

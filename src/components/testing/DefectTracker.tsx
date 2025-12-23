@@ -24,7 +24,7 @@ import {
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { getStatusColor } from "@/lib/utils";
-import { saveDefects, loadDefects } from "@/lib/storage";
+import { saveDefects, loadDefects } from "@/lib/cloudStorage";
 import { Plus, Edit, Trash2 } from "lucide-react";
 
 export default function DefectTracker() {
@@ -42,7 +42,13 @@ export default function DefectTracker() {
   });
 
   useEffect(() => {
-    setDefects(loadDefects());
+    const load = async () => {
+      const data = await loadDefects();
+      if (data.length > 0) {
+        setDefects(data);
+      }
+    };
+    load();
   }, []);
 
   useEffect(() => {

@@ -10,7 +10,7 @@ import {
   loadObjectives,
   saveQualityGates,
   loadQualityGates,
-} from "@/lib/storage";
+} from "@/lib/cloudStorage";
 
 const initialObjectives: TestObjective[] = [
   {
@@ -72,14 +72,20 @@ const qualityGates: TestObjective[] = [
 ];
 
 export default function ObjectivesCheckList() {
-  const [objectives, setObjectives] = useState<TestObjective[]>(() => {
-    const loaded = loadObjectives();
-    return loaded.length > 0 ? loaded : initialObjectives;
-  });
-  const [gates, setGates] = useState<TestObjective[]>(() => {
-    const loaded = loadQualityGates();
-    return loaded.length > 0 ? loaded : qualityGates;
-  });
+  const [objectives, setObjectives] =
+    useState<TestObjective[]>(initialObjectives);
+  const [gates, setGates] = useState<TestObjective[]>(qualityGates);
+
+  useEffect(() => {
+    const loadData = async () => {
+      const loadedObjs = await loadObjectives();
+      if (loadedObjs.length > 0) setObjectives(loadedObjs);
+
+      const loadedGates = await loadQualityGates();
+      if (loadedGates.length > 0) setGates(loadedGates);
+    };
+    loadData();
+  }, []);
 
   useEffect(() => {
     if (objectives.some((o) => o.completed)) {
